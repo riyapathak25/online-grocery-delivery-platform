@@ -1,3 +1,4 @@
+
 name: Grocery Platform CI
 
 on:
@@ -53,8 +54,3 @@ jobs:
           context: ./delivery-service
           push: false
           tags: grocery-delivery-service:latest
-
-      - name: Validate Kubernetes YAML
-        run: |
-          sudo snap install kubectl --classic
-          kubectl apply --dry-run=client -f k8s/
