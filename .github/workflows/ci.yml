@@ -54,3 +54,9 @@ jobs:
           context: ./delivery-service
           push: false
           tags: grocery-delivery-service:latest
+      - name: Build Frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          push: false
+          tags: grocery-frontend:latest
