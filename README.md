@@ -229,7 +229,43 @@ kubectl logs deployment/order-service
 kubectl logs deployment/api-gateway
 
 ```
+## Frontend
 
+The project includes a web-based grocery frontend built using:
+
+- HTML
+- CSS
+- JavaScript
+- NGINX
+
+The frontend communicates with the backend through the API Gateway.
+
+### Frontend Flow
+
+Browser
+↓
+Frontend
+↓
+NGINX API Gateway
+↓
+Microservices
+
+### Frontend Features
+
+- Grocery platform home page
+- Product service integration
+- Customer section
+- Cart section
+- Order section
+- Delivery section
+- Responsive user interface
+
+### Frontend Docker
+
+Build:
+
+```bash
+docker build -t grocery-frontend:latest ./frontend
 
 
 \## CI/CD
