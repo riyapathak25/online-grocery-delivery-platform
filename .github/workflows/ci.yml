@@ -1,0 +1,60 @@
+name: Grocery Platform CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Product Service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./product-service
+          push: false
+          tags: grocery-product-service:latest
+
+      - name: Build Customer Service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./customer-service
+          push: false
+          tags: grocery-customer-service:latest
+
+      - name: Build Cart Service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cart-service
+          push: false
+          tags: grocery-cart-service:latest
+
+      - name: Build Order Service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./order-service
+          push: false
+          tags: grocery-order-service:latest
+
+      - name: Build Delivery Service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./delivery-service
+          push: false
+          tags: grocery-delivery-service:latest
+
+      - name: Validate Kubernetes YAML
+        run: |
+          sudo snap install kubectl --classic
+          kubectl apply --dry-run=client -f k8s/
